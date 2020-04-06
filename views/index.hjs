@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tyndal GCS Dev</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous">
+    </script>
+  </head>
+  <body>
+    <h1>Tyndal GCS Dev</h1>
+    {{!-- <p>Tyndall GCS Dev</p> --}}
+    <form id="gscForm">
+      <label for="gcs">GCS</label><br>
+      <input type="text" id="gcs" name="gcs" value=""><br>
+      <input type="submit" id="submit" value="Submit">
+    </form>
+  </body>
+  <script>
+    function addFormListener (id){
+      $("#submit").click(function(event){
+        event.preventDefault();
+        query = $("#gcs").val()
+        console.log(query)
+        Fetch()
+      })
+    }
+    function Fetch(id){
+      $.post("/gcs", {"query": query}, function(data){
+        console.log(data);
+      })
+    }
+  </script>
+  <script>
+    addFormListener(gscForm);
+  </script>
+</html>
