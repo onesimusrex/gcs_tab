@@ -13,11 +13,10 @@ router.post('/', function(req, res, next) {
 
 function getCustomSearch(_query, _gcsResults, res, _start, _maxResults){
     if (_start > 0){
-        queryString = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyDzQFP10CU7eLq7OMVEe7xgHNQdwg9dxPs&cx=006933437979345530940:ej5rn3yvlcm&q='+_query+'&start='+(_start-1)/*+'&highRange='+(_start+9)*/;
+        queryString = 'https://www.googleapis.com/customsearch/v1?key='+process.env.TYNDALL_GCS_KEY_IFS+'&cx=006933437979345530940:ej5rn3yvlcm&q='+_query+'&start='+(_start-1);
     } else {
-        queryString = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyDzQFP10CU7eLq7OMVEe7xgHNQdwg9dxPs&cx=006933437979345530940:ej5rn3yvlcm&q='+_query;
+        queryString = 'https://www.googleapis.com/customsearch/v1?key='+process.env.TYNDALL_GCS_KEY_IFS+'&cx=006933437979345530940:ej5rn3yvlcm&q='+_query;
     }
-    console.log(queryString);
     request
         .get(queryString)
         .then(data => {
@@ -26,9 +25,9 @@ function getCustomSearch(_query, _gcsResults, res, _start, _maxResults){
             } else _gcsResults.results.push(data.body);
             console.log(typeof data.body.queries.nextPage !== 'undefined');
             if(typeof data.body.queries.nextPage !== 'undefined' && _gcsResults.results[0].items.length < _maxResults){
-                console.log('rerunning');
+                // console.log('rerunning');
                 _start = data.body.queries.nextPage[0].startIndex;
-                getCustomSearch(_query, _gcsResults, res, _start);
+                getCustomSearch(_query, _gcsResults, res, _start, _maxResults);
             } else res.send(_gcsResults.results[0]);
         });
     
