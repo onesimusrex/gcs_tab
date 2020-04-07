@@ -28,7 +28,7 @@ function getCustomSearch(_query, _gcsResults, res, _start, _maxResults){
                 // console.log('rerunning');
                 _start = data.body.queries.nextPage[0].startIndex;
                 getCustomSearch(_query, _gcsResults, res, _start, _maxResults);
-            } else res.send(_gcsResults.results[0]);
+            } else /*res.send(_gcsResults.results[0]);*/res.send('broken');
         });
     
 }
