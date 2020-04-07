@@ -10,7 +10,7 @@
     </script>
   </head>
   <body>
-    <h1>Tyndal GCS Dev</h1>
+    <h1>Tyndal GCS Dev v1.1</h1>
     {{!-- <p>Tyndall GCS Dev</p> --}}
     <form id="gscForm">
       <label for="gcs">GCS</label><br>
@@ -24,11 +24,11 @@
         event.preventDefault();
         query = $("#gcs").val()
         console.log(query)
-        Fetch()
+        Fetch(query)
       })
     }
-    function Fetch(id){
-      $.post("/gcs", {"query": query}, function(data){
+    function Fetch(_query){
+      $.post("/gcs", {"query": _query}, function(data){
         console.log(data);
       })
     }
