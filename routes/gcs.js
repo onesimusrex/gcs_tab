@@ -13,9 +13,9 @@ router.post('/', function(req, res, next) {
 
 function getCustomSearch(_query, _gcsResults, res, _start, _maxResults){
     if (_start > 0){
-        queryString = 'https://www.googleapis.com/customsearch/v1?key='+process.env.TYNDALL_GCS_KEY_IFS+'&cx=006933437979345530940:ej5rn3yvlcm&q='+_query+'&start='+(_start-1);
+        queryString = 'https://www.googleapis.com/customsearch/v1?key='+process.env.TYNDALL_GCS_KEY_IFS+'&cx=006933437979345530940:kp6pe1dh7oh&q='+_query+'&start='+(_start-1);
     } else {
-        queryString = 'https://www.googleapis.com/customsearch/v1?key='+process.env.TYNDALL_GCS_KEY_IFS+'&cx=006933437979345530940:ej5rn3yvlcm&q='+_query;
+        queryString = 'https://www.googleapis.com/customsearch/v1?key='+process.env.TYNDALL_GCS_KEY_IFS+'&cx=006933437979345530940:kp6pe1dh7oh&q='+_query;
     }
     request
         .get(queryString)

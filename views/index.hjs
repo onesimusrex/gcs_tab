@@ -10,7 +10,7 @@
     </script>
   </head>
   <body>
-    <h1>Tyndal GCS Dev v1.3</h1>
+    <h1>Tyndal GCS Dev v1.3.1</h1>
     {{!-- <p>Tyndall GCS Dev</p> --}}
     <form id="gscForm">
       <label for="gcs">GCS</label><br>
