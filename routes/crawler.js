@@ -95,7 +95,7 @@ function processURLs(Array, res, count){
     // for (var i=0;i<Array.length;i++){
     articles = {}
     if (count < Array.length){
-        console.log(Array[count]);
+        // console.log(Array[count]);
         request
             .get(/*'http://visualmedia.jacobs.com/Tyndall-IFS/technical_guidelines_division_33.php'*/Array[count])
             .end((err, res1) => {
@@ -113,17 +113,46 @@ function processURLs(Array, res, count){
                     var _parent2 = _p1.parentsUntil('article').filter('article').attr('id')
                     var _text = _p1.nextAll('p').text();
                     var _html = _p1.nextAll('p').html()
-                    var p = _parent2 || "intro";
-                    if (typeof articles[p] === "undefined"){
+                    var p = _parent2 || "Introduction";
+                    if (typeof articles[p] === "undefined" && _text != ""){
                         articles[p] = [];
                     }
-                    
-                    articles[p].push({
-                        // "parent": _parent,
-                        "heading": p,
-                        "text": _text,
-                        "text_html": _html
-                    });
+                    if (typeof _text !== "undefined" && _text != ""){
+                        articles[p].push({
+                            // "parent": _parent,
+                            "heading": p,
+                            "text": _text,
+                            "text_html": _html
+                        });
+                    }
+
+                })
+
+                $('article').map(function(i,el){
+                    var contentBase = $(this).find('div[class=team-title]').map(function(i,el){
+                        var _parentId = $(this).parentsUntil('article').filter('article').attr('id');
+                        var heading = $(this).children('span').text();
+                        var _text = $(this).nextAll(/*'h5,p'*/).text();
+                        var _html = $(this).nextAll(/*'h5,p'*/).html(); 
+                        if (typeof articles[_parentId] === "undefined" && _text != ""){
+                            articles[_parentId] = [];
+                        }
+                        
+                        console.log(heading || "no heading")
+                        console.log(_html.slice(0, 15)+"..." || "not found");
+                        try {
+                            if (true/*typeof _parentId !== "undefined" && typeof contentBase !== "undefined" && _text != ""*/){
+                                articles[_parentId].push({
+                                    "heading": heading,
+                                    "text": _text,
+                                    "text_html": _html
+                                })
+                            }
+                        } catch (err){
+                            console.log("error with " +heading +' in '+ _parentId)
+                            console.log(err);
+                        }
+                    })
                 })
 
                 var bigArray = $('article').find('div[class=acctitle]').map(function(i, el){
@@ -172,6 +201,7 @@ function processURLs(Array, res, count){
                             }
 
                             _this = this;
+                            /*  turn back on!
                             naturalLanguageUnderstanding.analyze(analyzeParams)
                                 .then(analysisResults => {
                                     // console.log(JSON.stringify(analysisResults.result, null, 2))
@@ -184,7 +214,7 @@ function processURLs(Array, res, count){
                                 .catch(err => {
                                     console.log('error', err);
                                 })
-
+                            */
 
 
 
@@ -223,12 +253,12 @@ function processURLs(Array, res, count){
             });
     } else {
         // res.send(JSON.stringify(_analyze1Results));
-        fs.writeFile('topics.json', JSON.stringify(_analyze1Results.results), (err) => {
+        fs.writeFile('topics_new.json', JSON.stringify(_analyze1Results.results), (err) => {
             if (err) throw err;
             console.log("data written to file")
         })
 
-        res.send(_analyze1Results.results["http://visualmedia.jacobs.com/Tyndall-IFS/technical_guidelines_division_33.php"]);
+        res.send(_analyze1Results.results/*["http://visualmedia.jacobs.com/Tyndall-IFS/technical_guidelines_division_33.php"]*/);
     }
 
     // }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tyndal GCS Dev</title>
+    <title>Tyndall GCS Dev</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script
       src="https://code.jquery.com/jquery-3.4.1.js"
@@ -11,7 +11,7 @@
     
   </head>
   <body>
-    <h1>Tyndal GCS Dev v1.3.1</h1>
+    <h1>Tyndall GCS Dev v1.3.1</h1>
     {{!-- <p>Tyndall GCS Dev</p> --}}
     <form id="gscForm">
       <label for="gcs">GCS</label><br>
