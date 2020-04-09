@@ -7,7 +7,7 @@ var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var gcs = require('./routes/gcs');
-
+var crawler = require('./routes/crawler');
 
 
 
@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/gcs', gcs);
+app.use('/crawler', crawler);
 
 
 

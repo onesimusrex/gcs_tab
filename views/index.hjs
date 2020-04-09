@@ -8,6 +8,7 @@
       integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
       crossorigin="anonymous">
     </script>
+    
   </head>
   <body>
     <h1>Tyndal GCS Dev v1.3.1</h1>
@@ -16,24 +17,50 @@
       <label for="gcs">GCS</label><br>
       <input type="text" id="gcs" name="gcs" value=""><br>
       <input type="submit" id="submit" value="Submit">
+      <br><br>
+      <input type="submit" id="crawl1" value="crawl tifs web">
+      <input type="submit" id="analyze1" value="analyze tifs web">
     </form>
   </body>
   <script>
-    function addFormListener (id){
-      $("#submit").click(function(event){
+    function addFormListener (id, callback){
+      $(id).click(function(event){
         event.preventDefault();
         query = $("#gcs").val()
-        console.log(query)
-        Fetch(query)
+
+        //turn this on later
+        /*console.log(query)
+        Fetch(query)*/
+
+        if(typeof callback !== "undefined"){
+          callback();
+        }
       })
+      return
     }
     function Fetch(_query){
       $.post("/gcs", {"query": _query}, function(data){
         console.log(data);
       })
+      return
+    }
+    function Crawl1(){
+      console.log('crawl1');
+      $.get("/crawler", function(data){
+        console.log(data);
+      })
+      return
+    }
+    function Analyze1(){
+      $.get("/crawler/analyze1", function(data){
+        console.log(JSON.parse(JSON.stringify(data)));
+      })
+      
     }
   </script>
   <script>
-    addFormListener(gscForm);
+    addFormListener("#submit"/*, Fetch*/);
+    addFormListener("#crawl1", Crawl1);
+    addFormListener("#analyze1", Analyze1);
   </script>
 </html>

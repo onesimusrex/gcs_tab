@@ -6,14 +6,20 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "compromise": "^13.1.1",
+    "compromise-paragraphs": "0.0.4",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "hjs": "~0.0.6",
     "http-errors": "~1.6.2",
+    "ibm-watson": "^5.4.0",
     "morgan": "~1.9.0",
     "nodemon": "^2.0.2",
-    "superagent": "^5.2.2"
+    "simplecrawler": "^1.1.8",
+    "superagent": "^5.2.2",
+    "superagent-throttle": "^1.0.1"
   }
 }
